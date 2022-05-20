@@ -259,7 +259,7 @@ class CaseListController extends Controller
                     'no_leader_policy' => $request->no_leader_policy,
                     'instruction_date' => Carbon::createFromFormat('d/m/Y', $request->instruction_date)->format('Y-m-d'),
                     'leader_claim_no' => $request->leader_claim_no,
-                    'claim_estimate' => str_replace('.', '', $request->claim_estimate),
+                    'claim_estimate' => str_replace('.', '', $request->claim_estimates),
                     'file_status_id' => 1,
                     'survey_date' => Carbon::createFromFormat('d/m/Y', $request->survey_date)->format('Y-m-d'),
                     'ia_limit' => Carbon::createFromFormat('d/m/Y', $request->survey_date)->addDay(7)->format('Y-m-d'),

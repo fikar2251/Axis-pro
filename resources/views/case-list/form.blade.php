@@ -30,7 +30,7 @@
             <select name="insurance" autocomplete="on" id="insurance" class="form-control focus @error('insurance') is-invalid @enderror">
                 <option disabled selected>Select Insurance</option>
                 @foreach($client as $data)
-                <option @if($data->id == $caseList->insurance_id) selected @endif value="{{ $data->id }}">{{ $data->brand }} - {{ $data->name }}</option>
+                <option @if($data->id == $caseList->insurance_id) selected @endif value="{{ $data->id }}" {{ (collect(old('insurance'))->contains($data->id)) ? 'selected':'' }}>{{ $data->brand }} - {{ $data->name }}</option>
                 @endforeach
             </select>
             @error('insurance')
@@ -48,7 +48,7 @@
             <select name="adjuster" id="adjuster" class="form-control focus @error('adjuster') is-invalid @enderror">
                 <option disabled selected>Select Adjuster</option>
                 @foreach($user as $data)
-                <option @if($data->id == $caseList->adjuster_id) selected @endif value="{{ $data->id }}">{{ $data->nama_lengkap }}</option>
+                <option @if($data->id == $caseList->adjuster_id) selected @endif value="{{ $data->id }}"  {{ (collect(old('adjuster'))->contains($data->id)) ? 'selected':'' }} >{{ $data->nama_lengkap }}</option>
                 @endforeach
             </select>
             @error('adjuster')
@@ -64,8 +64,8 @@
             <label for="category">Category <strong class="text-danger">*</strong></label>
             <select name="category" id="category" type="text" class="form-control focus @error('category') is-invalid @enderror">
                 <option disabled selected>Select Category</option>
-                <option {{ $caseList->category == 1 ? 'selected' : '' }} value="1">Marine</option>
-                <option {{ $caseList->category == 2 ? 'selected' : '' }} value="2">Non Marine</option>
+                <option {{ $caseList->category == 1 ? 'selected' : '' }} value="1" {{ (collect(old('category'))->contains(1)) ? 'selected':'' }} >Marine</option>
+                <option {{ $caseList->category == 2 ? 'selected' : '' }} value="2" {{ (collect(old('adjuster'))->contains(2)) ? 'selected':'' }} >Non Marine</option>
             </select>
             @error('category')
             <div class="invalid-feedback">
@@ -79,8 +79,8 @@
             <label for="currency">Currency <strong class="text-danger">*</strong></label>
             <select class="form-control focus @error('currency') is-invalid @enderror" name="currency" id="currency">
                 <option disabled selected>Select Currency</option>
-                <option @if($caseList->currency == 'IDR') selected @endif value="IDR">IDR</option>
-                <option @if($caseList->currency == 'USD') selected @endif value="USD">USD</option>
+                <option @if($caseList->currency == 'IDR') selected @endif value="IDR" {{ (collect(old('currency'))->contains("IDR")) ? 'selected':'' }} >IDR</option>
+                <option @if($caseList->currency == 'USD') selected @endif value="USD" {{ (collect(old('currency'))->contains("USD")) ? 'selected':'' }} >USD</option>
             </select>
             @error('currency')
             <div class="invalid-feedback">
@@ -94,6 +94,7 @@
         <div class="form-group">
             <label for="claim_estimate">Claim Estimate<strong class="text-danger">*</strong></label>
             <input type="text" name="claim_estimate" id="claim_estimate" class="form-control focus" value="{{ $caseList->claim_estimate ?? old('claim_estimate') }}">
+            <input type="text" name="claim_estimates" id="claim_estimates" class="form-control focus" value="{{ $caseList->claim_estimate ?? old('claim_estimates') }}">
 
             @error('claim_estimate')
             <div class="invalid-feedback">
@@ -146,7 +147,7 @@
             <select class="form-control focus @error('broker') is-invalid @enderror" name="broker" id="broker">
                 <option disabled selected>Select Broker</option>
                 @foreach($broker as $data)
-                <option @if($data->id == $caseList->broker_id) selected @endif value="{{ $data->id }}">{{ $data->nama_broker }} - {{ $data->alamat_broker }}</option>
+                <option @if($data->id == $caseList->broker_id) selected @endif value="{{ $data->id }}" {{ (collect(old('broker'))->contains($data->id)) ? 'selected':'' }} >{{ $data->nama_broker }} - {{ $data->alamat_broker }}</option>
                 @endforeach
             </select>
             @error('broker')
@@ -163,7 +164,7 @@
             <select class="form-control focus @error('incident') is-invalid @enderror incident" name="incident" id="incident">
                 <option disabled selected>Select Incident</option>
                 @foreach($incident as $data)
-                <option @if($data->id == $caseList->incident_id) selected @endif value="{{ $data->id }}">{{ $data->type_incident }}</option>
+                <option @if($data->id == $caseList->incident_id) selected @endif value="{{ $data->id }}" {{ (collect(old('incident'))->contains($data->id)) ? 'selected':'' }} >{{ $data->type_incident }}</option>
                 @endforeach
             </select>
             @error('incident')
@@ -180,7 +181,7 @@
             <select class="form-control focus @error('policy') is-invalid @enderror" name="policy" id="policy">
                 <option disabled selected>Select Policy</option>
                 @foreach($policy as $data)
-                <option @if($data->id == $caseList->policy_id) selected @endif value="{{ $data->id }}">{{ $data->type_policy }}</option>
+                <option @if($data->id == $caseList->policy_id) selected @endif value="{{ $data->id }}" {{ (collect(old('policy'))->contains($data->id)) ? 'selected':'' }} >{{ $data->type_policy }}</option>
                 @endforeach
             </select>
             @error('policy')
@@ -422,6 +423,8 @@
         //     }
         //     $(this).val(replaceCommas(currentVal));
         // });
+
+
         
         $(document).ready(function() {
             $("#claim_estimate").ready(function(event) {  
@@ -440,24 +443,24 @@
             });
         });
 
-        $("#claim_estimate").on("keyup", function(event ) {                   
-            var selection = window.getSelection().toString(); 
-            if (selection !== '') {
-                return; 
-            }       
+        // $("#claim_estimate").on("keyup", function(event ) {                   
+        //     var selection = window.getSelection().toString(); 
+        //     if (selection !== '') {
+        //         return; 
+        //     }       
 
-            if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
-                return; 
-            }       
+        //     if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
+        //         return; 
+        //     }       
 
-            var $this = $(this);            
-            var input = $this.val();            
-            input = input.replace(/[\D\s\._\-]+/g, ""); 
-            input = input?parseInt(input, 10):0; 
-            $this.val(function () {
-                return (input === 0)?"":input.toLocaleString("en-US"); 
-            }); 
-        }); 
+        //     var $this = $(this);            
+        //     var input = $this.val();            
+        //     input = input.replace(/[\D\s\._\-]+/g, ""); 
+        //     input = input?parseInt(input, 10):0; 
+        //     $this.val(function () {
+        //         return (input === 0)?"":input.toLocaleString("en-US"); 
+        //     }); 
+        // }); 
 
         $("#begin").datepicker({
             dateFormat: "dd/mm/yy"
@@ -528,33 +531,33 @@
             });
         }
     }
-    const formatter = function(num) {
-        var str = num.toString().replace("", ""),
-            parts = false,
-            output = [],
-            i = 1,
-            formatted = null;
-        if (str.indexOf(".") > 0) {
-            parts = str.split(".");
-            str = parts[0];
-        }
-        str = str.split("").reverse();
-        for (var j = 0, len = str.length; j < len; j++) {
-            if (str[j] != ",") {
-                output.push(str[j]);
-                if (i % 3 == 0 && j < (len - 1)) {
-                    output.push(",");
-                }
-                i++;
-            }
-        }
-        formatted = output.reverse().join("");
-        return ("" + formatted + ((parts) ? "." + parts[1].substr(0, 2) : ""));
-    };
+    // const formatter = function(num) {
+    //     var str = num.toString().replace("", ""),
+    //         parts = false,
+    //         output = [],
+    //         i = 1,
+    //         formatted = null;
+    //     if (str.indexOf(".") > 0) {
+    //         parts = str.split(".");
+    //         str = parts[0];
+    //     }
+    //     str = str.split("").reverse();
+    //     for (var j = 0, len = str.length; j < len; j++) {
+    //         if (str[j] != ",") {
+    //             output.push(str[j]);
+    //             if (i % 3 == 0 && j < (len - 1)) {
+    //                 output.push(",");
+    //             }
+    //             i++;
+    //         }
+    //     }
+    //     formatted = output.reverse().join("");
+    //     return ("" + formatted + ((parts) ? "." + parts[1].substr(0, 2) : ""));
+    // };
 
-    function rupiah(e) {
-        e.value = formatter(e.value)
-    }
+    // function rupiah(e) {
+    //     e.value = formatter(e.value)
+    // }
 
     setTimeout(function() {
         $('#incident').select2();
@@ -644,5 +647,32 @@
         $(qr).parent().parent().parent().remove()
         LetMeHereToCount(number)
     }
+
+    var rupiah = document.getElementById('claim_estimate');
+		rupiah.addEventListener('keyup', function(e){
+			// tambahkan 'Rp.' pada saat form di ketik
+			// gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+			rupiah.value = formatRupiah(this.value);
+            var titik = rupiah.value.replace(/[^,\d]/g, '');
+            document.getElementById("claim_estimates").value = titik;
+		});
+ 
+		/* Fungsi formatRupiah */
+		function formatRupiah(angka, prefix){
+			var number_string = angka.replace(/[^,\d]/g, '').toString(),
+			split   		= number_string.split(','),
+			sisa     		= split[0].length % 3,
+			rupiah     		= split[0].substr(0, sisa),
+			ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+ 
+			// tambahkan titik jika yang di input sudah menjadi angka ribuan
+			if(ribuan){
+				separator = sisa ? '.' : '';
+				rupiah += separator + ribuan.join('.');
+			}
+ 
+			rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+			return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+		}
     
 </script>
