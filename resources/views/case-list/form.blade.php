@@ -94,7 +94,7 @@
         <div class="form-group">
             <label for="claim_estimate">Claim Estimate<strong class="text-danger">*</strong></label>
             <input type="text" name="claim_estimate" id="claim_estimate" class="form-control focus" value="{{ $caseList->claim_estimate ?? old('claim_estimate') }}">
-            <input type="text" name="claim_estimates" id="claim_estimates" class="form-control focus" value="{{ $caseList->claim_estimate ?? old('claim_estimates') }}">
+            <input type="hidden" name="claim_estimates" id="claim_estimates" class="form-control" value="{{ $caseList->claim_estimate ?? old('claim_estimates') }}">
 
             @error('claim_estimate')
             <div class="invalid-feedback">
@@ -427,14 +427,14 @@
 
         
         $(document).ready(function() {
-            $("#claim_estimate").ready(function(event) {  
-                var input = $('#claim_estimate').val();            
-                input = input.replace(/[\D\s\._\-]+/g, ""); 
-                input = input?parseInt(input, 10):0; 
-                $('#claim_estimate').val(function () {
-                    return (input === 0)?"":input.toLocaleString("en-US"); 
-                }); 
-            });
+            // $("#claim_estimate").ready(function(event) {  
+            //     var input = $('#claim_estimate').val();            
+            //     input = input.replace(/[\D\s\._\-]+/g, ""); 
+            //     input = input?parseInt(input, 10):0; 
+            //     $('#claim_estimate').val(function () {
+            //         return (input === 0)?"":input.toLocaleString("id-ID"); 
+            //     }); 
+            // });
 
             $(".focus").map(function(focus) {
                 $(this).on('focus', function(){

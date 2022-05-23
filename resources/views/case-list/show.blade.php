@@ -314,9 +314,9 @@
                         </div>
                         @endif
 
-                        @if($caseList->is_expense == 1)
+                        {{-- @if($caseList->is_expense == 1) --}}
                         <a href="{{ route('caselist.expense', $caseList->id) }}" class="btn btn-primary my-3"><i class="fas fa-file-pdf"></i> Download</a>
-                        @endif
+                        {{-- @endif --}}
 
                         <table id="table-expense" width="100%" class="table table-bordered table-striped table-hover" style="font-size:12px;">
                             <thead>

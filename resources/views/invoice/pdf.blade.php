@@ -44,7 +44,7 @@
     <br>
 
     <div class="container-fluid">
-        <div class="row">
+        <div class="row" style="width: 590px">
             <div class="col">
                 <table cellpadding="0">
                     <tr>
@@ -59,7 +59,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="col" style="margin-left: 67%;">
+            <div class="col" style="margin-left: 85%; width: 500px">
                 <table>
                     <tr>
                         <th>Date</th>
@@ -105,8 +105,8 @@
             <div class="col" style="margin-left :10%">
                 <table cellpadding="0">
                     <tr>
-                        <th width="100">Client</th>
-                        <th width="10">:</th>
+                        <th style="vertical-align:top" width="100">Client</th>
+                        <th style="vertical-align: top" width="10">:</th>
                         <th>{{ $invoice->caselist->insured }}</th>
                     </tr>
                     @if($caselist->category == 1)
@@ -165,7 +165,7 @@
                                         {{ $invoice->type_invoice != 1 ? number_format($share, 2) : number_format($share, 2) }}%
                                     </td>
                                     <td>{{ $caselist->currency }}</td>
-                                    <td width="100px" class="text-right">
+                                    <td width="120px" class="text-right">
                                         {{ $invoice->type_invoice != 1 ? number_format($fee_adj * $share / 100, 2) : number_format($caselist->professional_service * $share / 100, 2) }}
                                     </td>
                                 </tr>
@@ -185,7 +185,7 @@
                                         {{ $invoice->caselist->discount != 0 ? '' : $invoice->caselist->discount_percent .'%' }}
                                     </td>
                                     <td>{{ $caselist->currency }}</td>
-                                    <td width="100px" class="text-right">
+                                    <td width="120px" class="text-right">
                                         {{ number_format($discount) }}
                                     </td>
                                     @endif
@@ -217,7 +217,7 @@
                                     </td>
                                     <td>{{ number_format($share, 2) }}%</td>
                                     <td>{{ $caselist->currency }}</td>
-                                    <td width="100px" class="text-right">
+                                    <td width="120px" class="text-right">
                                         @if($inv->type_invoice == 1)
                                         {{ number_format($inv->caselist->expense->where('is_active', 1)->sum('total') * $share / 100, 2) }}
                                         @else
@@ -240,7 +240,7 @@
                                     <td width="150px">Sub Total</td>
                                     <td width="270px"></td>
                                     <td width="50px">{{ $caselist->currency }}</td>
-                                    <td width="100px" class="text-right">
+                                    <td width="120px" class="text-right">
                                         @if($inv->type_invoice == 1)
                                         @php
                                         $subtotal = ($inv->caselist->expense->where('is_active', 1)->sum('total') * $share / 100) + ($caselist->professional_service * $share / 100) - $discount
@@ -263,12 +263,12 @@
                             <table style="margin-left: 20px;  margin-bottom: 10px;">
                                 <tr>
                                     <th width="150px">
-                                        PPN 10%
+                                        PPN 11%
                                     </th>
                                     <td width="250px"></td>
                                     <td width="50px">{{ $caselist->currency }}</td>
-                                    <td width="100px" class="text-right">
-                                        {{ number_format($subtotal *10 / 100,2) }}
+                                    <td width="120px" class="text-right">
+                                        {{ number_format($subtotal *11 / 100,2) }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -286,8 +286,8 @@
                                     <th width="150px">TOTAL AMOUNT DUE</th>
                                     <th width="270px"></th>
                                     <th width="50px">{{ $caselist->currency }}</th>
-                                    <th width="100px" class="text-right">
-                                        {{ number_format($subtotal + ($subtotal *10 / 100), 2) }}
+                                    <th width="120px" class="text-right">
+                                        {{ number_format($subtotal + ($subtotal *11 / 100), 2) }}
                                     </th>
                                 </tr>
                                 <tr>
@@ -370,7 +370,7 @@
             <table style="font-size: 8px;" width="100%">
                 <tr>
                     <th width="400px"></th>
-                    <th width="150px" style="border-left: 1px solid #1f67a7;">
+                    <th width="180px" style="border-left: 1px solid #1f67a7;">
                         <div style="margin-left: 5px;">
                             <b style="color: #1f67a7;">PT AXIS INTERNATIONAL INDONESIA</b> <br>
                             Pakuwon Tower 12th floor, Unit I <br>
@@ -380,8 +380,8 @@
                     </th>
                     <th width="150px" style="border-left: 1px solid #1f67a7;">
                         <div style="margin-left: 5px;">
-                            <i class="fab fa-tumblr" style="color: #1f67a7; font-weight:bold;"></i> + 62 21 2290 3759, 2290 3831 <br>
-                            <i class="fab fa-tumblr" style="color: #1f67a7; font-weight:bold;"></i> + 62 62 21 2138 3924 <br>
+                            <span style="color: #1f67a7; font-weight:bold;">t</span> + 62 21 2290 3759, 2290 3831 <br>
+                            <span style="color: #1f67a7; font-weight:bold;">t</span> + 62 21 2138 3924 <br>
                             <span style="color: #1f67a7; font-weight:bold;">e</span> claims@axis-adjusters.com <br>
                             <span style="color: #1f67a7; font-weight:bold;">w</span> www.axis-lossadjusters.com <br>
                         </div>
