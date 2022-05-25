@@ -1591,7 +1591,7 @@
 
                     @if(request()->get('page') == "nav-report-1" || request()->get('page') == "nav-report-2" && $caseList->file_status_id != 5)
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCloseCase">Close Case</button>
-                    @endif
+                    @endif  
 
                     @if(request()->get('page') == "nav-report-1" || request()->get('page') == "nav-report-2")
                     <button type="button" class="btn btn-info ml-2" data-toggle="modal" data-target="#modalInstruction">Instruction Closed</button>
