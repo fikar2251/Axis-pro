@@ -226,7 +226,7 @@ class InvoiceController extends Controller
                     $exp->update(['is_active' => 0]);
                 }
 
-                Invoice::where('case_list_id', $invoice->case_list_id)->where('type_invoice', 1)->delete();
+                Invoice::where('id', $invoice->id)->where('type_invoice', 1)->delete();
 
                 Invoice::onlyTrashed()->forceDelete();
                 $caselist->update(['is_ready' => 1]);
@@ -249,8 +249,8 @@ class InvoiceController extends Controller
             foreach ($expense as $exp) {
                 $exp->update(['is_active' => 0]);
             }
-            Invoice::where('case_list_id', $invoice->case_list_id)->delete();
-
+            Invoice::where('id', $invoice->id)->delete();
+          
             Invoice::onlyTrashed()->forceDelete();
             $caselist->update(['is_ready' => 2]);
         }

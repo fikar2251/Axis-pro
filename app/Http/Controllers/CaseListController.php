@@ -441,6 +441,7 @@ class CaseListController extends Controller
         $adjuster = Expense::where('case_list_id', $caseList->id)->groupBy('adjuster')->get();
         
         $pdf = \PDF::loadView('case-list.expense', ['caseList' => $caseList, 'adjuster' => $adjuster]);
+    
         return $pdf->stream('Expense Case ' . $caseList->file_no . '.pdf');
     }
 
@@ -674,7 +675,7 @@ class CaseListController extends Controller
         if (auth()->user()->hasRole('admin')) {
             $this->validate($request, [
                 'from' => 'required',
-                'to' => 'required',
+                'to' => 'required', 
                 'adjuster' => 'required',
                 'status' => 'required'
             ]);
@@ -868,7 +869,7 @@ class CaseListController extends Controller
         ]);
 
         $caselist = CaseList::find($request->id);
-
+        
         if ($request->type_close == 1) {
             if ($caselist->currency == 'IDR') {
                 $caselist->update([

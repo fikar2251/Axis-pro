@@ -230,26 +230,26 @@
                                 <td>{{ Carbon\Carbon::parse($caselist->begin)->format('d/m/Y') }}</td>
                                 <td>{{ Carbon\Carbon::parse($caselist->end)->format('d/m/Y') }}</td>
                                 <td>{{ Carbon\Carbon::parse($caselist->instruction_date)->format('d/m/Y') }}</td>
-                                <td>{{ Carbon\Carbon::parse($caselist->survey)->format('d/m/Y') }}</td>
-                                <td>{{ Carbon\Carbon::parse($caselist->now_update)->format('d/m/Y') }}</td>
+                                <td>{{ Carbon\Carbon::parse($caselist->survey_date)->format('d/m/Y') }}</td>
+                                <td>{{ $caselist->now_update != NULL ? Carbon\Carbon::parse($caselist->now_update)->format('d/m/Y') : $caselist->now_update }} </td>
                                 <!-- All & Outstanding -->
                                 @if($status != '5')
-                                <td>{{ Carbon\Carbon::parse($caselist->ia_date)->format('d/m/Y') }}</td>
+                                <td>{{ $caselist->ia_date != NULL ? Carbon\Carbon::parse($caselist->ia_date)->format('d/m/Y') : $caselist->ia_date }}</td>
                                 <td>{{ $caselist->ia_curr }}</td>
                                 <td>{{ number_format($caselist->ia_amount, 2) }}</td>
-                                <td>{{ Carbon\Carbon::parse($caselist->pr_date)->format('d/m/Y') }}</td>
+                                <td>{{ $caselist->pr_date != NULL ? Carbon\Carbon::parse($caselist->pr_date)->format('d/m/Y') : $caselist->pr_date }}</td>
                                 <td>{{ $caselist->pr_curr }}</td>
                                 <td>{{ number_format($caselist->pr_amount, 2) }}</td>
-                                <td>{{ Carbon\Carbon::parse($caselist->ir_st_date)->format('d/m/Y') }}</td>
+                                <td>{{ $caselist->ir_st_date != NULL ? Carbon\Carbon::parse($caselist->ir_st_date)->format('d/m/Y') : $caselist->ir_st_date }}</td>
                                 <td>{{ $caselist->ir_st_curr }}</td>
                                 <td>{{ number_format($caselist->ir_st_amount, 2) }}</td>
-                                <td>{{ Carbon\Carbon::parse($caselist->ir_nd_date)->format('d/m/Y') }}</td>
+                                <td>{{ $caselist->ir_nd_date != NULL ? Carbon\Carbon::parse($caselist->ir_nd_date)->format('d/m/Y') : $caselist->ir_nd_date }}</td>
                                 <td>{{ $caselist->ir_nd_curr }}</td>
                                 <td>{{ number_format($caselist->ir_nd_amount, 2) }}</td>
-                                <td>{{ Carbon\Carbon::parse($caselist->pa_date)->format('d/m/Y') }}</td>
+                                <td>{{ $caselist->pa_date != NULL ? Carbon\Carbon::parse($caselist->pa_date)->format('d/m/Y') : $caselist->pa_date }}</td>
                                 <td>{{ $caselist->pa_curr }}</td>
                                 <td>{{ number_format($caselist->pa_amount, 2) }}</td>
-                                <td>{{ Carbon\Carbon::parse($caselist->fr_date)->format('d/m/Y') }}</td>
+                                <td>{{ $caselist->fr_date != NULL ? Carbon\Carbon::parse($caselist->fr_date)->format('d/m/Y') : $caselist->fr_date }}</td>
                                 <td>{{ $caselist->fr_curr }}</td>
                                 <td>{{ number_format($caselist->fr_amount, 2) }}</td>
                                 @endif
@@ -257,7 +257,7 @@
 
                                 <td>{{ $caselist->remark }}</td>
                                 <td>{{ $caselist->status->nama_status }}</td>
-                                <td>{{ Carbon\Carbon::parse($caselist->date_insctruction)->format('d/m/Y') }}</td>
+                                <td>{{ $caselist->date_instruction != NULL ? Carbon\Carbon::parse($caselist->date_insctruction)->format('d/m/Y') : $caselist->date_instruction }}</td>
                                 <td>{{ $caselist->pic_insurer }}</td>
 
                                 @php
@@ -409,7 +409,8 @@
                     footer: true,
                     exportOptions: {
                         modifier: {
-                            page: 'all'
+                            page: 'all',
+                            selected: null,
                         },
                         columns: ':visible',
                     }
