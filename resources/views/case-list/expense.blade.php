@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="robots" content="noindex, nofollow">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {{-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> --}}
+    <meta http-equiv="Content-Type" content="text/html">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="yoriadiatma">
     <link rel="icon" href="">
@@ -217,11 +218,10 @@
                                 @php
                               
                                 $expense = App\Models\Expense::where('case_list_id', $caseList->id)->where('adjuster', $adj->adjuster)->get();
-
+                                
                                 @endphp
                                 @foreach($expense as $exp)
                                 <tr>
-                                    
                                     <td>{{ $loop->iteration }}.</td>
                                     <td width="70px">{{ Carbon\Carbon::parse($exp->tanggal)->format('d/m/Y') }}</td>
                                     <td width="100px"><b>{{ $exp->category_expense }}</b></td>
@@ -254,6 +254,7 @@
                                 <td colspan="6"></td>
                                 <td style="text-align: right;"><b>{{number_format($caseList->expense->sum('total'),2,',','.')  }}</b></td>
                             </tr>
+                            
                         </table>
                     </td>
                 </tr>

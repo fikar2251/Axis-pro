@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Case Lists Tanggal {{ Carbon\Carbon::parse($from)->format('d/m/Y') }} s.d {{ Carbon\Carbon::parse($from)->format('d/m/Y') }} - {{ $status == 5 ? 'Closed File' : $status }}</title>
+    <title>Laporan Case Lists Tanggal {{ Carbon\Carbon::parse($from)->format('d/m/Y') }} s.d {{ Carbon\Carbon::now()->format('d/m/Y') }} - {{ $status == 5 ? 'Closed File' : $status }}</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -17,6 +17,9 @@
 </head>
 
 <body>
+    @php
+        error_reporting(0);
+    @endphp
     <div class="container-fluid">
         <div class="d-flex justify-content-center">
             <div>
@@ -29,51 +32,7 @@
 
         </div>
         <hr>
-        {{--<br>
-        <form action="{{ route('caselist.excel') }}" method="post">
-        @csrf
-        <div class="card">
-            <div class="btn-group">
-                <a href="{{ route('case-list.index') }}" class="btn btn-primary">Back</a>
-                <button type="submit" class="btn btn-success">Excel</button>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="from">from</label>
-                            <input type="date" id="from" name="from" class="form-control" readonly value="{{ $from }}">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="to">to</label>
-                            <input type="date" id="to" name="to" value="{{ $to }}" readonly class="form-control">
-                        </div>
-                    </div>
-                    @if(auth()->user()->hasRole('admin'))
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="adjuster">adjuster</label>
-                            <input type="text" id="adjuster" name="adjuster" value="{{ $adjuster }}" readonly class="form-control">
-                        </div>
-                    </div>
-                    @else
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="status">status</label>
-                            <input type="text" id="status" name="status" value="{{ $status }}" readonly class="form-control">
-                        </div>
-                    </div>
-
-                    @endif
-                </div>
-            </div>
-
-        </div>
-        </form>
-        <br> --}}
+        
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -217,7 +176,9 @@
                                 <td>{{ $caselist->adjuster->kode_adjuster }}</td>
                                 <td>{{ $member->insurance->name }}</td>
                                 <td>{{ $member->share }}%</td>
-                                <td>{{ $member->is_leader == 1 ? 'Leader' : 'Member' }}</td>
+                                <td>
+                                    {{ $member->is_leader == 1 ? 'Leader' : 'Member' }}
+                                </td>
                                 <td>{{ $caselist->broker->nama_broker }}</td>
                                 <td>{{ $caselist->incident->type_incident }}</td>
                                 <td>{{ $caselist->policy->type_policy }}</td>
@@ -403,7 +364,7 @@
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
     <script>
         $('#table').DataTable({
-            dom: 'Bfrtip',
+            dom: 'Blfrtip',
             buttons: [{
                     extend: 'excelHtml5',
                     footer: true,
@@ -413,16 +374,18 @@
                             selected: null,
                         },
                         columns: ':visible',
+                        
                     }
+                    
                 },
                 'copy', 'csv', 'pdf', 'print'
             ],
             columnDefs: [{
                 visible: true
             }],
-            "paging": false,
-            "ordering": false,
-            "searching": false
+            "paging": true,
+            "ordering": true,
+            "searching": true
         })
     </script>
 </body>

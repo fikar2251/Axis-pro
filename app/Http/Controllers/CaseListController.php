@@ -438,10 +438,11 @@ class CaseListController extends Controller
 
     public function expense(CaseList $caseList)
     {
+        
         $adjuster = Expense::where('case_list_id', $caseList->id)->groupBy('adjuster')->get();
         
         $pdf = \PDF::loadView('case-list.expense', ['caseList' => $caseList, 'adjuster' => $adjuster]);
-    
+        $pdf->setPaper('A4', 'potrait');
         return $pdf->stream('Expense Case ' . $caseList->file_no . '.pdf');
     }
 

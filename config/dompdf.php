@@ -10,8 +10,8 @@ return array(
     | Set some default values. It is possible to add all defines that can be set
     | in dompdf_config.inc.php. You can also override the entire config file.
     |
-    */
-    'show_warnings' => false,   // Throw an Exception on warnings from dompdf
+     */
+    'show_warnings' => false, // Throw an Exception on warnings from dompdf
     'orientation' => 'portrait',
     'defines' => array(
         /**
@@ -69,7 +69,7 @@ return array(
          * should be an absolute path.
          * This is only checked on command line call by dompdf.php, but not by
          * direct class use like:
-         * $dompdf = new DOMPDF();	$dompdf->load_html($htmldata); $dompdf->render(); $pdfdata = $dompdf->output();
+         * $dompdf = new DOMPDF();    $dompdf->load_html($htmldata); $dompdf->render(); $pdfdata = $dompdf->output();
          */
         "chroot" => realpath(base_path()),
 
@@ -198,7 +198,7 @@ return array(
          *
          * @var bool
          */
-        "enable_php" => false,
+        "enable_php" => true,
 
         /**
          * Enable inline Javascript
@@ -239,6 +239,5 @@ return array(
          */
         "enable_html5_parser" => false,
     ),
-
 
 );
