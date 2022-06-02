@@ -446,6 +446,12 @@ class CaseListController extends Controller
         return $pdf->stream('Expense Case ' . $caseList->file_no . '.pdf');
     }
 
+    public function showExpense(CaseList $caseList)
+    {
+        $adjuster = Expense::where('case_list_id', $caseList->id)->groupBy('adjuster')->get();
+        return view('case-list.showexpense', compact('adjuster', 'caseList'));
+    }
+
 
     public function edit(CaseList $caseList)
     {

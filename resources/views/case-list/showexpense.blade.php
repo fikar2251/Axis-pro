@@ -13,7 +13,7 @@
 
     <style>
         @page {
-            margin: 0
+            margin-bottom: 1.825in;
         }
 
         body {
@@ -36,7 +36,7 @@
             display: block;
             margin: 0 auto;
             box-sizing: border-box;
-            /* page-break-after: always; */
+            page-break-after: always;
         }
 
         /** Paper sizes **/
@@ -261,6 +261,9 @@
             </table>
         </div>
     </div>
+    <script>
+        window.onload = window.print;
+    </script>
 </body>
 
 </html>

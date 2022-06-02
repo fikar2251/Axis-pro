@@ -63,6 +63,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/case-list/{caseList:id}/penunjukan', [CaseListController::class, 'penunjukan'])->name('caselist.penunjukan');
     Route::get('/case-list/{caseList:id}/copyPolice', [CaseListController::class, 'copyPolice'])->name('caselist.copyPolice');
     Route::get('/case-list/{caseList:id}/expense', [CaseListController::class, 'expense'])->name('caselist.expense');
+    Route::get('/case-list/{caseList:id}/showexpense', [CaseListController::class, 'showExpense'])->name('caselist.showexpense');
     Route::get('/case-list/{caseList:id}/transcript', [CaseListController::class, 'transcript'])->name('caselist.transcript');
     Route::get('/case-list/restore', [CaseListController::class, 'restore'])->name('caselist.restore');
     Route::get('/case-list/{caseList:id}/assignment', [CaseListController::class, 'assigment'])->name('caselist.assignment');

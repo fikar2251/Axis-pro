@@ -364,6 +364,7 @@
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
     <script>
         $('#table').DataTable({
+            "bSortCellsTop": true,
             dom: 'Blfrtip',
             buttons: [{
                     extend: 'excelHtml5',
