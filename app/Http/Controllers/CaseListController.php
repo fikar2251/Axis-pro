@@ -753,11 +753,11 @@ class CaseListController extends Controller
             }
 
 
-            History::create([
-                'name' => auth()->user()->nama_lengkap,
-                'type' => 'Case List Laporan Admin',
-                'datetime' => Carbon::now()->format('Y-m-d H:i:s')
-            ]);
+            // History::create([
+            //     'name' => auth()->user()->nama_lengkap,
+            //     'type' => 'Case List Laporan Admin',
+            //     'datetime' => Carbon::now()->format('Y-m-d H:i:s')
+            // ]);
 
             return view('case-list.laporan', [
                 'from' =>  Carbon::createFromFormat('d/m/Y', $request->from)->format('Y-m-d'),
@@ -788,11 +788,11 @@ class CaseListController extends Controller
                 $fee_usd = $case->where('claim_amount_curr', 'USD')->sum('fee_usd');
             }
 
-            History::create([
-                'name' => auth()->user()->nama_lengkap,
-                'type' => 'Case List Laporan Adjuster',
-                'datetime' => Carbon::now()->format('Y-m-d H:i:s')
-            ]);
+            // History::create([
+            //     'name' => auth()->user()->nama_lengkap,
+            //     'type' => 'Case List Laporan Adjuster',
+            //     'datetime' => Carbon::now()->format('Y-m-d H:i:s')
+            // ]);
 
             return view('case-list.laporan', [
                 'from' => Carbon::createFromFormat('d/m/Y', $request->from)->format('Y-m-d'),
