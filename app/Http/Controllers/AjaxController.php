@@ -311,7 +311,8 @@ class AjaxController extends Controller
     {
         $response = Expense::find($id);
         $response['tanggal'] = Carbon::parse($response->tanggal)->format('d/m/Y');
-        $response['amount'] = number_format($response->amount, 0, ',', '.');
+        // $response['amount'] = number_format($response->amount, 0, ',', '.');
+        $response['amount'] = $response->amount;
         $response['adjuster'] = User::where('kode_adjuster', $response->adjuster)->first();
         $response['category'] = CategoryExpense::where('nama_kategory', $response->category_expense)->first();
         return response()->json($response);

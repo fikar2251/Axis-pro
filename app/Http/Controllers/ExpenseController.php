@@ -38,6 +38,7 @@ class ExpenseController extends Controller
 
     public function store(Request $request)
     {
+        $comma = array('.',',');
         $request->validate([
             'name' => 'required',
             'adjuster' => 'required',
@@ -59,7 +60,7 @@ class ExpenseController extends Controller
                     'adjuster' => $request->adjuster,
                     'name' => $request->name,
                     'qty' => $request->qty,
-                    'amount' => str_replace(',', '',  $request->amount),
+                    'amount' => str_replace($comma, '',  $request->amount),
                     'total' => floatval($request->qty * str_replace(',', '',  $request->amount)),
                     'category_expense' => $request->category,
                     'tanggal' => Carbon::createFromFormat('d/m/Y', $request->tanggal)->format('Y-m-d')

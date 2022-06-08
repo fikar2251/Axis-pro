@@ -590,6 +590,7 @@ class CaseListController extends Controller
                 'risk_location' => $request->risk_location,
                 'currency' => $request->currency,
                 'leader' => $request->insurance,
+                'leader_claim_no' => $request->leader_claim_no,
                 'begin' => Carbon::createFromFormat('d/m/Y', $request->begin)->format('Y-m-d'),
                 'end' => Carbon::createFromFormat('d/m/Y', $request->end)->format('Y-m-d'),
                 'dol' => Carbon::createFromFormat('d/m/Y', $request->dol)->format('Y-m-d'),
